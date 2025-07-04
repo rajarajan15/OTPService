@@ -14,9 +14,66 @@ const DynamicPage = () => {
   const currentTheme = isDarkTheme ? darkTheme : lightTheme;
 
   useEffect(() => {
-    const randomType = Math.floor(Math.random() * 5);
-    setOtpType(randomType);
+    const fetchData = async () => {
+      const key = "9D941AF69FAA5E041172D29A8B459BB4";
+        
+      try {
+        const response = await fetch('http://localhost:3001/api/check-otp-availability', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ secretKey: key })
+        });
+  
+        const result = await response.json();
+  
+        if (result.success) {
+          const otpTypeDetails = {
+            otpType: result.data.otpType,
+            otpDigits: result.data.otpDigits,
+            remainingRequests: result.data.remainingRequests,
+            canGenerateOTP: result.data.canGenerateOTP
+          };
+
+          const l=result.data.otpType;
+          let ty=1;
+
+          if(l==='numeric')
+              ty=2;
+          else if(l==='alphanumeric')
+              ty=3;
+          else if(l==='complex')
+              ty=4;
+          
+          let ans= otpTypeDetails.otpDigits * 10+ty;
+          const randomType = Math.floor(Math.random() * 5);
+
+          ans=ans*10+randomType;
+  
+          console.log('OTP Type Details:', ans);
+          setOtpType(ans);
+        } else {
+          if (response.status === 400 && result.message === 'OTP request limit exhausted') {
+            alert('OTP request limit has been exhausted. Please contact support.');
+          } else if (response.status === 404) {
+            alert('Invalid authentication key. Please check your configuration.');
+          } else if (response.status === 403) {
+            alert('User account is inactive. Please contact support.');
+          } else {
+            alert('An error occurred: ' + result.message);
+          }
+        }
+  
+      } catch (error) {
+        console.error('Network error:', error);
+        alert('Network error occurred. Please try again.');
+      }
+    };
+  
+    fetchData();
   }, []);
+  
 
   const handleSubmit = (data) => {
     setSubmittedData(data);

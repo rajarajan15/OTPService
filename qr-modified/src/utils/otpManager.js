@@ -9,7 +9,15 @@ class SecureOTPManager {
   }
 
   generateOTP(digitString, type1) {
-    const getType = type1;
+
+    let v=type1;
+    const getType = v%10;
+    v= Math.floor(v / 10);
+    const type=v%10;
+    v= Math.floor(v / 10);
+    const digits = v;
+
+    console.log("Got :",digits);
 
     const pairs = [];
     for (let i = 0; i < digitString.length; i += 2) {
@@ -56,6 +64,32 @@ class SecureOTPManager {
         return product;
       }).join('');
     }
+
+    if(digits===4)
+    {
+      otp=otp.slice(0,-1);
+    }
+    else if (digits === 6) {
+      const lastDigit = parseInt(otp[otp.length - 1]);
+      const shifted = lastDigit >> 1;
+      otp += shifted.toString();
+    }
+    else if(digits === 7)
+    {
+      const lastDigit = parseInt(otp[otp.length - 1]);
+      let shifted = lastDigit >> 1;
+      otp += shifted.toString();
+      shifted=shifted>>1;
+      otp+=shifted.toString();
+    }
+
+    console.log("otp digit:",otp);
+
+    if (type === 1) {
+      otp = otp.split('').map(d => String.fromCharCode('A'.charCodeAt(0) + parseInt(d))).join('');
+    }
+
+    console.log("otp complex:",otp);
 
     this.otpData = otp;
     this.generatedAt = new Date();

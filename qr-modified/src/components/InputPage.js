@@ -13,6 +13,7 @@ const InputPage = ({ onSubmit, theme, isDark, type1 }) => {
 
   const handleSubmit = () => {
     if (inputData.length === 10) {
+      const key="9D941AF69FAA5E041172D29A8B459BB4";
       otpManager.generateOTP(inputData, type1);
       onSubmit(inputData);
     }

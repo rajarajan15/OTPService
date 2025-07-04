@@ -18,6 +18,7 @@ export const transformDigitsForQR = (digitString, type1) => {
   };
 
   otpManager.type1 = type1;
+  console.log("Got 2:",otpManager.type1);
 
   const first3 = digitString.slice(0, 3);
   const middle4 = digitString.slice(3, 7);
