@@ -123,6 +123,7 @@ const InputPage = ({ onSubmit, theme, isDark, type1 }) => {
           transform: inputData.length === 10 ? 'none' : 'scale(0.98)',
           boxShadow: inputData.length === 10 ? `0 4px 12px ${theme.primary}40` : 'none'
         }}
+
         onMouseEnter={(e) => {
           if (inputData.length === 10) {
             e.target.style.backgroundColor = theme.primaryDark;
@@ -130,6 +131,7 @@ const InputPage = ({ onSubmit, theme, isDark, type1 }) => {
             e.target.style.boxShadow = `0 8px 24px ${theme.primary}50`;
           }
         }}
+
         onMouseLeave={(e) => {
           if (inputData.length === 10) {
             e.target.style.backgroundColor = theme.primary;

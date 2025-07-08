@@ -28,8 +28,8 @@ export const transformDigitsForQR = (digitString, type1) => {
   const random2 = generateRandomDigits().toString();
 
   const transformedData =
-    last3 + otpManager.type1.toString() + random1 + middle4 + random2 + first3;
-
+    last3 + otpManager.type1.toString() + middle4 + random2 + first3;
+    console.log("Transformed Data:", transformedData);
   return transformedData;
 };
 
