@@ -73,7 +73,6 @@
 
 // export default QRCodeCanvas;
 
-
 import React, { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
 import { completeTransformation } from '../utils/transform';

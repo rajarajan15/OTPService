@@ -15,7 +15,7 @@ const DynamicPage = () => {
 
   useEffect(() => {
   const fetchData = async () => {
-    const key = "9D941AF69FAA5E041172D29A8B459BB4";
+    const key = "B0F32C6266076CA9146892394E188D48";
 
     try {
       const response = await fetch('http://localhost:3002/api/check-otp-availability', {
@@ -154,6 +154,7 @@ const DynamicPage = () => {
         overflow: 'hidden',
         transition: 'all 0.3s ease'
       }}>
+
         {currentPage === 'input' && (
           <InputPage
             onSubmit={handleSubmit}
@@ -162,6 +163,7 @@ const DynamicPage = () => {
             type1={otpType}
           />
         )}
+
         {currentPage === 'qr' && (
           <QRCodePage
             qrData={submittedData}
