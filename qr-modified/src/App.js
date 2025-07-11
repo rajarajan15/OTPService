@@ -31,8 +31,6 @@ function App() {
       <OTPFlow
         secretKey={SECRET_KEY}
         apiEndpoint="http://localhost:3002/api/check-otp-availability"
-        onError={handleError}
-        onSuccess={handleSuccess}
         initialTheme="light" // or "dark"
         // customTheme={myCustomTheme} // optional custom theme object
         // containerStyle={{ maxWidth: '600px' }} // optional custom container styles

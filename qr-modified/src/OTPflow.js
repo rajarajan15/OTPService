@@ -113,6 +113,16 @@ const OTPFlow = ({
 
   const handleVerificationSuccess = () => {
     setCurrentPage('success');
+  };
+
+  const handleSuccessComplete = () => {
+    // Mark as verified in localStorage
+    localStorage.setItem("otpVerified", "true");
+    // Return to input page
+    setCurrentPage('input');
+    setSubmittedData('');
+    otpManager.clearOTP();
+    // Call the onSuccess callback if provided
     onSuccess?.();
   };
 
@@ -213,6 +223,7 @@ const OTPFlow = ({
         <SuccessPage
           onRestart={handleRestart}
           theme={currentTheme}
+          onComplete={handleSuccessComplete}
         />
       )}
     </div>
