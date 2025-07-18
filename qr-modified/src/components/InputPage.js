@@ -3,6 +3,7 @@ import { otpManager } from '../utils/otpManager';
 
 const InputPage = ({
   onSubmit = () => {},
+  onReset =()=>{},
   theme = {
     primary: '#007bff',
     primaryDark: '#0056b3',
@@ -70,6 +71,7 @@ const InputPage = ({
   const handleResetVerification = () => {
     setVerified(false);
     localStorage.removeItem("otpVerified");
+    onReset();
   };
 
   // Scoped styles using the unique component ID

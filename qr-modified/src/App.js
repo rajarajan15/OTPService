@@ -3,7 +3,7 @@ import OTPFlow from './OTPflow';
 
 function App() {
   // Your secret key - in production, this should come from environment variables
-  const SECRET_KEY = "9D941AF69FAA5E041172D29A8B459BB4";
+  const SECRET_KEY = "7367B12EA3890F6137BC5EF5C07E5EA1";
 
   // Handle errors from the OTP flow
   const handleError = (error) => {
