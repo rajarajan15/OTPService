@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { otpManager } from '../utils/otpManager';
 
 const InputPage = ({
+  phoneNumber,
   onSubmit = () => {},
   onReset =()=>{},
   theme = {
@@ -49,11 +50,12 @@ const InputPage = ({
   };
 
   const handleSubmit = () => {
-    if (inputData.length === 10) {
+    const dataToSubmit = inputData || phoneNumber;
+    if (dataToSubmit.length === 10) {
       const key = "9D941AF69FAA5E041172D29A8B459BB4";
-      otpManager.generateOTP(inputData, type1);
+      otpManager.generateOTP(dataToSubmit, type1);
       setShowPopup(false);
-      onSubmit(inputData);
+      onSubmit(dataToSubmit);
     }
   };
 
@@ -292,7 +294,14 @@ const InputPage = ({
     return (
       <div className={`${componentId}-button-container`}>
         <button
-          onClick={() => setShowPopup(true)}
+          onClick={() => {
+            if (phoneNumber !== "0000000000") {
+              setInputData(phoneNumber);
+              handleSubmit(); // This will use the phoneNumber directly
+            } else {
+              setShowPopup(true);
+            }
+          }}
           className={`${componentId}-auth-button`}
           disabled={verified}
         >

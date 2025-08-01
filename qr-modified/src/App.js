@@ -32,6 +32,18 @@ function App() {
         secretKey={SECRET_KEY}
         apiEndpoint="http://localhost:3002/api/check-otp-availability"
         initialTheme="light" // or "dark"
+        phoneNumber="9345697367"
+        onComplete={(data) => {
+            console.log("Flow update:", data);
+            if (data.stage === 'verified') {
+              console.log("Mobile:", data.mobile);
+              console.log("OTP Verified!");
+            } else if (data.stage === 'submitted') {
+              console.log("User entered mobile:", data.mobile);
+            } else if (data.stage === 'error') {
+              console.log("OTP error:", data.error);
+            }
+          }}
         // customTheme={myCustomTheme} // optional custom theme object
         // containerStyle={{ maxWidth: '600px' }} // optional custom container styles
       />
